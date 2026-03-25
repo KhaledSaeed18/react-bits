@@ -65,6 +65,7 @@ const TabsLayout = ({ children, className }) => {
     if (saved) toast.success?.(<>Added {nameEl} to favorites</>) ?? toast(<>Added {nameEl} to favorites</>);
     else toast.error?.(<>Removed {nameEl} from favorites</>) ?? toast(<>Removed {nameEl} from favorites</>);
   };
+
   const contentMap = {
     PreviewTab: null,
     CodeTab: null
@@ -79,8 +80,14 @@ const TabsLayout = ({ children, className }) => {
   return (
     <Tabs.Root w="100%" variant="plain" lazyMount defaultValue="preview" className={className}>
       <Tabs.List w="100%">
-        <Flex gap={2} justifyContent="space-between" alignItems="flex-start" w="100%" wrap="wrap">
-          <Flex gap={2} wrap="wrap" minW="0" flex="1">
+        <Flex
+          gap={2}
+          justifyContent={{ base: 'flex-start', md: 'space-between' }}
+          alignItems="center"
+          w="100%"
+          wrap="wrap"
+        >
+          <Flex gap={2} wrap="wrap" flex={{ base: 'none', md: '1' }}>
             <Tabs.Trigger value="preview" {...TAB_STYLE_PROPS}>
               <Icon as={FiEye} /> Preview
             </Tabs.Trigger>
@@ -90,7 +97,7 @@ const TabsLayout = ({ children, className }) => {
             </Tabs.Trigger>
           </Flex>
 
-          <Flex alignItems="center" gap={2} flexShrink={0}>
+          <Flex alignItems="center" gap={2} wrap="wrap">
             {hasChanges && (
               <Box
                 as="button"
